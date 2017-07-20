@@ -1,24 +1,20 @@
-const TodoList = function() {
-   this.list = []
-   this.id = 0
+const { readTasks, writeTasks } = require('../task.js')
+
+const add = ( name, callBack, done=false  ) => {
+  readTasks((error, todos) => {
+    if (error) return callBack(error)
+    let id 
+    if (todos.legnth === 0 ) {
+      id = todos[todos.length-1].id+1
+    }
+    const newTodos = todos.concat({id, name, done})
+    const newTodosJson = JSON.stringify(newTodos)
+    writeTasks(newTodosJson)
+    console.log('------------------------------------');
+    console.log('Created task ' + id + '.');
+    console.log('------------------------------------');
+  })
+  return 'Add function ran'
 }
 
-TodoList.prototype.items = function () {
-  return this.list
-}
-
-TodoList.prototype.add = function (task) {
-  let taskObj = {task, complete:false, id: this.id++}
-  this.list.push(taskObj)
-}
-
-let list = new TodoList()
-
-console.log(list.items());
-console.log('------------------------------------');
-list.add('new item 1');
-list.add('new item 2');
-list.add('new item 3');
-console.log(list.items());
-console.log('------------------------------------');
-
+module.exports = add

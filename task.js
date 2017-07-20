@@ -1,19 +1,23 @@
-const fs = require('fs')
-const DATA_STROE = './tasks.json'
+const list = require('./commands/list')
+const add = require('./commands/add')
+const done = require('./commands/done')
 
-const readTasks = (callBack) => {
-  fs.readFile('./tasks.json', 'utf8', (err, data) => {
-    if (err) return callBack(error)
-    const taskArray = JSON.parse(data)
-    cb(null, todos)
-  })
-  return 'This function is running'
-  // taskArray.forEach((task, i) => console.log(`${i} ${task}`))
+let command = process.argv[2]
+let todo = process.argv[3]
+
+const run = ( command, todo ) => {
+  if (command === 'list') {
+    list(console.log)
+    return command
+  } else if (command === 'add') {
+    add(todo)
+    return command
+  } else if (command === 'done') {
+    done(todo)
+    return command
+  }
 }
 
-const writeTasks = (jsonString) => {
-  fs.writeFile()
-  })
-}
+run(command, todo)
 
-readTasks()
+module.exports = run
