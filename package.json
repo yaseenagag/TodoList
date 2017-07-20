@@ -1,0 +1,11 @@
+{
+  "name": "todolist",
+  "version": "1.0.0",
+  "description": "TodoList with callBacks",
+  "main": "task.js",
+  "scripts": {
+    "test": "mocha ./test.js"
+  },
+  "author": "Yaseen Hussain",
+  "license": "ISC"
+}
